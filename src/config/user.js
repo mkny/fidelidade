@@ -23,7 +23,7 @@ module.exports = {
 						// currentPage: data.info.page,
 						totalRecords: data.info.results,
 						totalRecordsPerPage: limit,
-						totalRecordsPage: data.results.length,
+						totalRecordsInPage: data.results.length,
 						totalPages: Math.ceil(data.info.results / limit),
 					}
 				}

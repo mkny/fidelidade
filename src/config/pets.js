@@ -36,7 +36,7 @@ const config = {
 						currentPage: 1,
 						totalRecords: data.length,
 						totalRecordsPerPage: limit,
-						totalRecordsPage: data.length,
+						totalRecordsInPage: data.length,
 						totalPages: Math.ceil(data.length / limit),
 					}
 				}

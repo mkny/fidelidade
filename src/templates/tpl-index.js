@@ -116,12 +116,21 @@ class Index extends React.Component {
 
 		const pager = {...this.props.pager, ...this.state.pager};
 
+		
+
 		return <section className="content">
 			<div className="row">
 				<div className="col-md-12">
 					<div className="box">
 						<div className="box-header">
 							<h4>{page.title}</h4>
+							<a href="#" onClick={() => {
+								// console.log(this.table)
+								this.table.setState({
+									// currentPage: 10,
+									totalRecordsPerPage: 100,
+								})
+							}}>Limit 100</a>
 						</div>
 
 						<div className="box-body table-responsive">
@@ -140,7 +149,11 @@ class Index extends React.Component {
 									<div className="col-md-12">
 											<LxTable
 												// dynamic
+												ref={tb => this.table = tb}
+
 												className="table table-stripped"
+												classNamePager="pagination pagination-sm pull-right"
+
 												datasource={datasource}
 												
 												{...pager}
