@@ -27,6 +27,7 @@ import CfgUser from './config/user'
 
 
 import TplIndex from './templates/tpl-index'
+import TplUsabroker from './templates/tpl-usabroker'
 // import TplIndex from './templates/tpl-index'
 import TplForm from './templates/tpl-form'
 
@@ -45,6 +46,9 @@ const Routes = <Router history={history}>
 					<IndexRoute component={TplIndex} config={CfgProduto} />
 					<Route path="add" component={TplForm} config={CfgProduto} />
 				</Route>*/}
+		<Route path="broker">
+			<IndexRoute component={TplUsabroker} config={CfgUser} />
+		</Route>
 		<Route path="pets">
 			<IndexRoute component={TplIndex} config={CfgPets} />
 			<Route path="add" component={TplForm} config={CfgPets} />

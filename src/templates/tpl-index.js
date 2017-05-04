@@ -11,6 +11,8 @@ import LxTable from 'react-lx-table'
 
 import { broke } from './../ducks/linx/lxbroker'
 
+
+// @broker
 class Index extends React.Component {
 	constructor(props) {
 		super(props);
@@ -51,7 +53,6 @@ class Index extends React.Component {
 
 	handleGetResults () {
 		const { read } = _.at(this.props, 'route.config.actions')[0];
-		// const { url, limit, module, action, order, offset } = read;
 		
 		this.props.dispatch(broke('get', read));
 		
@@ -60,7 +61,7 @@ class Index extends React.Component {
 		// 	this.props.dispatch(swaggerGet(module, action, {limit: limit||10, offset: offset||0, order: order||''}));
 		// } else if(url){
 		// 	this.props.dispatch(broke(read))
-		// 	// console.log(this.props)
+		
 		// 	// this.props.dispatch({
 		// 	// 	type: '@@broke/axios/GET',
 		// 	// 	payload: axios.get(url)
@@ -101,13 +102,15 @@ class Index extends React.Component {
 
 	render(){
 		// Pager vars
-		const { totalRecords, totalRecordsPerPage, currentPage, totalPages } = _.at(this.props, 'pager')[0] || {};
+		// const { totalRecords, totalRecordsPerPage, currentPage, totalPages } = _.at(this.props, 'pager')[0] || {};
 
 		// Location
 		const { pathname } = this.props.location;
 
 		// DS
-		const datasource = _.at(this.props,'table.datasource')[0] || [];
+		const dsp = _.at(this.props,'table.datasource')[0];
+		const datasource = dsp && dsp.length ? dsp:[];
+
 
 		// Loader
 		const { isLoading } = this.props;
@@ -117,20 +120,12 @@ class Index extends React.Component {
 		const pager = {...this.props.pager, ...this.state.pager};
 
 		
-
 		return <section className="content">
 			<div className="row">
 				<div className="col-md-12">
 					<div className="box">
 						<div className="box-header">
 							<h4>{page.title}</h4>
-							<a href="#" onClick={() => {
-								// console.log(this.table)
-								this.table.setState({
-									// currentPage: 10,
-									totalRecordsPerPage: 100,
-								})
-							}}>Limit 100</a>
 						</div>
 
 						<div className="box-body table-responsive">
@@ -144,32 +139,32 @@ class Index extends React.Component {
 									</div>
 								</div>
 							</div>
-							{datasource.length > 0 && 
-								<div className="row">
-									<div className="col-md-12">
-											<LxTable
-												// dynamic
-												ref={tb => this.table = tb}
+							<div className="row">
+								<div className="col-md-12">
+										<LxTable
+											// dynamic
+											ref={tb => this.table = tb}
 
-												className="table table-stripped"
-												classNamePager="pagination pagination-sm pull-right"
+											className="table table-stripped"
+											classNamePager="pagination pagination-sm pull-right"
 
-												datasource={datasource}
-												
-												{...pager}
-												
-												headers={datagrid.headers}
-												buttons={datagrid.buttons}
-												
-												// onChangeLimit={this.handleChangeLimit}
-												// onClickPage={this.handleChangePage}
-												// onClickOrder={this.handleChangeOrder}
-												
-											/>
-											<p><strong>{currentPage} of {totalPages} ({datasource.length}/{totalRecords}) {totalRecordsPerPage}/page</strong></p>
-									</div>
+											datasource={datasource}
+											
+											{...pager}
+											
+											headers={datagrid.headers}
+											buttons={datagrid.buttons}
+											
+											// onChangeLimit={this.handleChangeLimit}
+											// onClickPage={this.handleChangePage}
+											// onClickOrder={this.handleChangeOrder}
+											
+										/>
+										{/*
+										<p><strong>{currentPage} of {totalPages} ({datasource.length}/{totalRecords}) {totalRecordsPerPage}/page</strong></p>
+										*/}
 								</div>
-							}
+							</div>
 						</div>
 						<div className="box-footer"></div>
 						{isLoading && this.loading()}
@@ -182,7 +177,7 @@ class Index extends React.Component {
 
 Index = connect((state, props) => {
 	let { read } = props.route.config.actions;
-	// console.log(check++, read.normalize)
+	
 
 	if(read.normalize){
 		return read.normalize(state, read);

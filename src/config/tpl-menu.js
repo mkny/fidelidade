@@ -6,6 +6,11 @@ module.exports = {
         href: '/',
         childrens: []
       },{
+          id: 8,
+          label: 'Brok\'ng',
+          icon: 'fa-users',
+          href: '/broker',
+      },{
           id: 7,
           label: 'Pets (swagger)',
           icon: 'fa-users',
