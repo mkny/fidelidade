@@ -1,26 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import superBrokerHOC from './createBrokerHOC'
 
-import createBroker from './createBroker'
-
-
-const broker = bbb => (WrappedComponent) => {
+const connectedBroker = (WrappedComponent) => {
 	class LxBrokerReal extends React.Component {
 		static contextTypes = {
 			_lxbroker: PropTypes.object
 		};
 
 		render(){
-			// const props = {...this.props}
 			const props = {...this.props, ...this.context}
 
 			return <WrappedComponent
-					{...props}
-					/>
+				{...props}
+				/>
 		}
 	}
 
-	return createBroker(LxBrokerReal);
+	return superBrokerHOC(LxBrokerReal)
 }
 
-export default (broker)
+export default connectedBroker

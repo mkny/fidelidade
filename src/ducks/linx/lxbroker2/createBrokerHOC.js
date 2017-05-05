@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import { create, read, update, del } from './actions'
 
 
-
-const createBroker = (WrappedComponent) => {
+const superBrokerHOC = (WrappedComponent) => {
 	const connected = (Component) => connect()(Component)
 
 	class ConnectedBroker extends React.Component {
@@ -16,26 +16,20 @@ const createBroker = (WrappedComponent) => {
 		getChildContext(){
 			return {
 				_lxbroker: {
-					get: () => this.getData(),
-					post: () => this.postData(),
+					create: (...args) => this.dispatcher(create, ...args),
+					read: (...args) => this.dispatcher(read, ...args),
+					update: (...args) => this.dispatcher(update, ...args),
+					del: (...args) => this.dispatcher(del, ...args),
 				}
 			}
 		}
 
-		postData(){
-			this.props.dispatch({
-				type: 'post here'
-			})
-		}
-
-		getData(){
-			this.props.dispatch({
-				type: 'get here'
-			})
+		dispatcher(action, ...args){
+			const data = action(...args);
+			data && this.props.dispatch(data);
 		}
 
 		render() {
-
 			const { dispatch, ...rest } = this.props
 
 			return <WrappedComponent
@@ -47,4 +41,4 @@ const createBroker = (WrappedComponent) => {
 	return connected(ConnectedBroker)
 }
 
-export default createBroker
+export default superBrokerHOC

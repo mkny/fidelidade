@@ -14,7 +14,7 @@ module.exports = {
 				if(!data || !data.results) {
 					return {}
 				}
-
+				
 
 				return {
 					// isLoading: isLoading,

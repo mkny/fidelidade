@@ -7,7 +7,7 @@ import {
 	BROKE_SWAGGER_W8,
 	BROKE_SWAGGER_NO,
 	BROKE_SWAGGER_OK,
-} from './LxBrokerActionTypes'
+} from './actionTypes'
 /**
  * Reducer ;)
  * 

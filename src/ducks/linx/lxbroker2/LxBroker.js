@@ -3,11 +3,11 @@
 // import swagger from 'swagger-client'
 
 
-import reducer from './LxBrokerReducer'
-import broker from './Broker'
+import reducer from './reducer'
+import lxbroker from './createConnectedBroker'
 
 
 
-export { broker };
+export { lxbroker };
 
 export default reducer;
