@@ -6,8 +6,6 @@
 import reducer from './reducer'
 import lxbroker from './createConnectedBroker'
 
+export { lxbroker }
 
-
-export { lxbroker };
-
-export default reducer;
+export { reducer }

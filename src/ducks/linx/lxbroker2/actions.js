@@ -1,5 +1,10 @@
 import axios from 'axios'
-// import swagger from 'swagger-client'
+import swagger from 'swagger-client'
+
+// Swagger implementation (check package.json later)
+// import path from 'path'
+// import isAbsoluteUrl from 'is-absolute-url'
+
 // The CRUD
 import {
 	BROKE_AXIOS,
@@ -12,6 +17,11 @@ import {
 	// BROKE_SWAGGER_OK,
 } from './actionTypes'
 
+// const doSwagger = (json, module, method) => {
+	
+// }
+
+
 /**
  * Metodo para fazer o create
  * 
@@ -21,13 +31,20 @@ export const create = () => {
 	console.log('create');
 }
 
+
 /**
  * Metodo para fazer o read
- * 
- * @return {void}
+ * @param  {object} pathProps     Configuracao de conexao com o servidor
+ * @param  {string} pathProps.url     Url ou caminho local para o arquivo json (swagger) OU Url do webservice (axios)
+ * @param  {string} pathProps.module     Modulo a ser tratado (swagger)
+ * @param  {string} pathProps.method     Acao dentro do modulo (swagger)
+ * @param  {object} requestParams Parametros do request
+ * @param  {object} config        Configuracoes que sao repassadas para os motores
+ * @return {void}               Dispara para o Redux
  */
-export const read = (pathProps, requestParams, config={}) => {
-	let { url, module, method } = pathProps;
+export const read = (pathProps, requestParams, config={}) => dsp => {
+	let { url } = pathProps;
+	const { module, method } = pathProps;
 
 	if(typeof pathProps === 'string'){
 		url = pathProps;
@@ -35,17 +52,31 @@ export const read = (pathProps, requestParams, config={}) => {
 	
 	if(module && method){
 		// use swagger
+
+		config[(typeof url === 'string') ? 'url':'spec'] = url;
+		// console.log(requestParams)
+
+		swagger(config).then(sw => {
+			try {
+				dsp({
+					type: BROKE_SWAGGER,
+					payload: sw.apis[module][method](requestParams)
+				})
+			} catch(e) {
+				console.log(sw.apis, e)
+			}
+		})
+
 		
-		return { type: BROKE_SWAGGER }
 	} else {
 		// use axios
 		config['params'] = requestParams
 
 		// brok'ng
-		return {
+		dsp({
 			type: BROKE_AXIOS,
 			payload: axios.get(url, config)
-		}
+		})
 	}
 }
 

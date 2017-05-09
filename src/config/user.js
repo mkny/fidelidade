@@ -14,18 +14,17 @@ module.exports = {
 				if(!data || !data.results) {
 					return {}
 				}
-				
 
 				return {
-					// isLoading: isLoading,
-					table: { datasource : data.results },
-					pager: {
-						// currentPage: data.info.page,
-						totalRecords: data.info.results,
-						totalRecordsPerPage: limit,
-						totalRecordsInPage: data.results.length,
-						totalPages: Math.ceil(data.info.results / limit),
-					}
+					table: {
+						datasource : data.results,
+						pager: {
+							totalRecords: data.info.results,
+							totalRecordsPerPage: limit,
+							totalRecordsInPage: data.results.length,
+							totalPages: Math.ceil(data.info.results / limit),
+						}
+					},
 				}
 			},
 			// module: 'sistemas-erp-controller',

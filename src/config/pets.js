@@ -3,6 +3,8 @@ import _ from 'lodash'
 // const ds = (a) => {
 // 	console.log(a)
 // }
+// const json = require('./swagger.json');
+const json = 'http://petstore.swagger.io/v2/swagger.json';
 
 const config = {
 	page: {
@@ -12,10 +14,11 @@ const config = {
 		create: '',
 		read: {
 			module: 'pet',
-			action: 'findPetsByStatus',
+			method: 'findPetsByStatus',
 			limit: 10,
 			// order: '+nomeSistemaERP',
-			url: 'http://petstore.swagger.io/v2/swagger.json',
+			url: json,
+			
 			params: {
 				status: 'sold'
 			},
@@ -31,13 +34,15 @@ const config = {
 				
 				return {
 					// isLoading: isLoading,
-					table: { datasource : data },
-					pager: {
-						currentPage: 1,
-						totalRecords: data.length,
-						totalRecordsPerPage: limit,
-						totalRecordsInPage: data.length,
-						totalPages: Math.ceil(data.length / limit),
+					table: {
+						datasource : data,
+						pager: {
+							currentPage: 1,
+							totalRecords: data.length,
+							totalRecordsPerPage: limit,
+							totalRecordsInPage: data.length,
+							totalPages: Math.ceil(data.length / limit),
+						}
 					}
 				}
 			}

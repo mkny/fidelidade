@@ -1,22 +1,58 @@
 import React from 'react'
 import { connect } from 'react-redux'
-// import { Link } from 'react-router'
 import _ from 'lodash'
-// import LxTable from '/node_modules/react-lx-table'
+import LxTable from 'react-lx-table'
 
 import { lxbroker } from './../ducks/linx/lxbroker2/LxBroker'
 
-class Index extends React.Component {
-	componentWillMount(){
-		const { _lxbroker } = this.props;
-		const url = 'https://randomuser.me/api';
-		const params = {
-			results: 3,
-			seed: 'linxcard',
-			page: 1
-		};
+import AdminBox from './layout/admin-box'
 
-		_lxbroker.read({url},params)
+class Index extends React.Component {
+	constructor(props){
+		super(props);
+
+		const { read } = _.at(props, 'route.config.actions')[0];
+
+		this.state = {
+			read,
+			table: {
+				datasource: []
+			}
+		}
+
+		this.handleClickPage = this.handleClickPage.bind(this);
+		this.handleClickOrder = this.handleClickOrder.bind(this);
+	}
+
+	componentWillReceiveProps(nextProps){
+		if(nextProps.table){
+			this.setState({table: nextProps.table})
+		}
+	}
+
+	componentWillMount(){
+		this.reload()
+	}
+
+	handleClickPage(number){
+		_.update(this.state, 'read.params.page', o => number-1)
+
+		this.reload()
+	}
+
+	handleClickOrder(elmt, card){
+		const field = `${elmt},${card}`;
+
+		_.update(this.state, 'read.params.sort', o => field );
+
+		// Ao ordenar, volta pro 0
+		return this.handleClickPage(1);
+	}
+
+	reload(){
+		const { read : { url, module, method, params } } = this.state;
+
+		this.props._lxbroker.read({url, module, method}, params)
 	}
 
 
@@ -26,23 +62,39 @@ class Index extends React.Component {
 
 	render(){
 		const props = this.props;
-		// console.log(props)
+		const { table } = this.state;
+		const { datasource } = table;
+		const { status } = props;
+
+		const head = <div>
+			<h4>Hello broker</h4>
+			<button className="btn btn-success" type="button" onClick={() => this.reload()}>Refresh</button>
+		</div>
+							
 
 		return <section className="content">
 			<div className="row">
 				<div className="col-md-12">
-					<div className="box">
-						<div className="box-header">
-							<h4>Hello broker</h4>
-						</div>
+					<AdminBox header={head} isLoading={status === 'waiting'} className="table-responsive">
 
-						<div className="box-body table-responsive">
-							<p>Hi ;) - is loading? ({ props.loading ? 'yes':'no' })</p>
-							{props.table && <p>There is {props.table.datasource.length} results ready to manipulate</p>}
-						</div>
-						<div className="box-footer"></div>
-						{props.loading && this.loading()}
-					</div>
+						<p>There is {(table.pager && table.pager.totalRecords) || (datasource && datasource.length)} results ready to manipulate</p>
+
+						<LxTable
+							dynamic
+
+							className="table table-stripped"
+							classNamePager="pagination pagination-sm pull-right"
+
+							datasource={datasource}
+
+							{...table.pager}
+
+							onClickPage={this.handleClickPage}
+							onClickOrder={this.handleClickOrder}
+							/>
+
+						{status === 'nok' && <h4>An error was found!</h4>}
+					</AdminBox>
 				</div>
 			</div>
 		</section>
@@ -50,19 +102,22 @@ class Index extends React.Component {
 }
 
 Index = connect((state, ownProps) => {
-	const { status } = state.broker;//data
-	const { read } = _.at(ownProps, 'route.config.actions')[0];
-
+	const { status, read } = {...state.broker,..._.at(ownProps, 'route.config.actions')[0]}
+	
+	let jsonReturn = {}
+	
 	if(read.normalize){
-		return {
-			loading: status !== 'ok',
+		jsonReturn = {
+			status,
 			...read.normalize(state, read)
 		}
 	}
 
-	return {}
+	return jsonReturn;
 })(Index)
 
 Index = lxbroker(Index)
 
 export default Index;
+
+

@@ -21,13 +21,15 @@ import Home from './templates/home';
 // import CfgProduto from './config/produto'
 import CfgPets from './config/pets'
 import CfgUser from './config/user'
+import CfgItaUser from './config/ita-user'
 // # Configs
 
 
 
+import TplUsabroker from './templates/tpl-usabroker'
+import TplUsabrokerForm from './templates/tpl-usabroker-form'
 
 import TplIndex from './templates/tpl-index'
-import TplUsabroker from './templates/tpl-usabroker'
 // import TplIndex from './templates/tpl-index'
 import TplForm from './templates/tpl-form'
 
@@ -47,7 +49,8 @@ const Routes = <Router history={history}>
 					<Route path="add" component={TplForm} config={CfgProduto} />
 				</Route>*/}
 		<Route path="broker">
-			<IndexRoute component={TplUsabroker} config={CfgUser} />
+			<IndexRoute component={TplUsabroker} config={CfgItaUser} />
+			<Route path="add" component={TplUsabrokerForm} config={CfgItaUser} />
 		</Route>
 		<Route path="pets">
 			<IndexRoute component={TplIndex} config={CfgPets} />
