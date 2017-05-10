@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { create, read, update, del } from './actions'
+import { create, read, update, del, doSwagger } from './actions'
 
 
 const superBrokerHOC = (WrappedComponent) => {
@@ -20,6 +20,7 @@ const superBrokerHOC = (WrappedComponent) => {
 					read: (...args) => this.dispatcher(read, ...args),
 					update: (...args) => this.dispatcher(update, ...args),
 					del: (...args) => this.dispatcher(del, ...args),
+					doSwagger: (...args) => this.dispatcher(doSwagger, ...args),
 				}
 			}
 		}

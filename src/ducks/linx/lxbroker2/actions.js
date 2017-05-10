@@ -17,9 +17,20 @@ import {
 	// BROKE_SWAGGER_OK,
 } from './actionTypes'
 
-// const doSwagger = (json, module, method) => {
-	
-// }
+export const doSwagger = (config={}) => {
+	config.spec = config.url
+	delete config.url
+	// if(!config.url && !config.spec){
+	// 	throw Error('No Specification found')
+	// }
+
+	swagger(config).then(sw => {
+		console.log(sw)
+		// cb(sw);
+	})
+}
+
+
 
 
 /**
@@ -54,8 +65,7 @@ export const read = (pathProps, requestParams, config={}) => dsp => {
 		// use swagger
 
 		config[(typeof url === 'string') ? 'url':'spec'] = url;
-		// console.log(requestParams)
-
+		
 		swagger(config).then(sw => {
 			try {
 				dsp({

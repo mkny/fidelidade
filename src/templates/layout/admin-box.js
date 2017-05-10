@@ -1,4 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
+import { withRouter } from 'react-router'
 
 class AdminBox extends React.Component {
 
@@ -7,14 +10,22 @@ class AdminBox extends React.Component {
 	}
 
 	render() {
-		const { header, className, children, footer, isLoading } = this.props;
+		const {
+			header,
+			className,
+			children,
+			footer,
+			isLoading,
+			color
+		} = this.props;
 
-		return <div className="box">
-			<div className="box-header">{header}</div>
-			<div className={`box-body ${className}`}>
-				{children}
+		return <div className={`box ${color && 'box-'+color}`}>
+			<div className="box-header">{typeof header === 'string' ? <h3>{header}</h3>:header}</div>
+			<div className={`box-body ${className ? className:''}`}>{children}</div>
+			<div className="box-footer">
+
+				{footer}
 			</div>
-			<div className="box-footer">{footer}</div>
 			{isLoading && this.loader()}
 		</div>
 
@@ -26,7 +37,14 @@ AdminBox.defaultProps = {
 	footer : '',
 }
 
-export default AdminBox
+AdminBox.propTypes = {
+	color: PropTypes.oneOf([
+		'primary',
+		'success',
+		'info',
+		'danger',
+		'warning'
+	])
+}
 
-
-
+export default withRouter(AdminBox)

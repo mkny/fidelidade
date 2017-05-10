@@ -1,6 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import {Link} from 'react-router'
+
+
+
+
 import LxTable from 'react-lx-table'
 
 import { lxbroker } from './../ducks/linx/lxbroker2/LxBroker'
@@ -62,16 +67,17 @@ class Index extends React.Component {
 
 	render(){
 		const props = this.props;
-		const { table } = this.state;
-		const { datasource } = table;
-		const { status } = props;
+		const { table, table: { datasource } } = this.state;
+		const { location: { pathname }, status } = props
 
 		const head = <div>
 			<h4>Hello broker</h4>
-			<button className="btn btn-success" type="button" onClick={() => this.reload()}>Refresh</button>
+			<div className="btn-group">
+				<Link to={pathname+'/add'} className="btn btn-default">New</Link>
+				<button className="btn btn-primary" type="button" onClick={() => this.reload()}>Refresh</button>
+			</div>
 		</div>
 							
-
 		return <section className="content">
 			<div className="row">
 				<div className="col-md-12">

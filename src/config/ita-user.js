@@ -13,6 +13,8 @@ module.exports = {
 	actions: {
 		create: {
 			url: json,
+			// module: 
+			// method: 
 		},
 		read: {
 			url : json,
@@ -46,6 +48,9 @@ module.exports = {
 		update: '',
 		del: '',
 	},
+	form: [{
+
+	}]
 	// datagrid: {
 	// 	datasource: [],
 	// 	pagination: {},

@@ -4,6 +4,7 @@ import { Router, Route, IndexRoute, browserHistory as history, Redirect  } from 
 // # Templates
 import App from './templates/App';
 import Home from './templates/home';
+import Features from './templates/features';
 //	// # Dynamic
 // import LxCrud from './templates/lxcrud';
 // import LxCrudForm from './templates/lxcrudform';
@@ -36,6 +37,7 @@ import TplForm from './templates/tpl-form'
 const Routes = <Router history={history}>
 	<Route path="/" component={App}>
 		<IndexRoute component={Home} />
+		<Route path="features" component={Features} />
 		{/*<Route path="cliente">
 					<IndexRoute component={TplIndex} config={CfgCliente} />
 					<Route path="add" component={LxCrudForm} config={CfgCliente} />

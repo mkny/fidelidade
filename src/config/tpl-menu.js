@@ -1,5 +1,11 @@
 module.exports = {
 	menu: [{
+        // id: 1,
+        label: 'Features',
+        icon: 'fa-home',
+        href: '/features',
+        childrens: []
+      },{
         id: 3,
         label: 'Home',
         icon: 'fa-home',
