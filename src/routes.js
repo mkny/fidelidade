@@ -32,7 +32,7 @@ import TplUsabrokerForm from './templates/tpl-usabroker-form'
 
 import TplIndex from './templates/tpl-index'
 // import TplIndex from './templates/tpl-index'
-import TplForm from './templates/tpl-form'
+// import TplForm from './templates/tpl-form'
 
 const Routes = <Router history={history}>
 	<Route path="/" component={App}>
@@ -56,7 +56,7 @@ const Routes = <Router history={history}>
 		</Route>
 		<Route path="pets">
 			<IndexRoute component={TplIndex} config={CfgPets} />
-			<Route path="add" component={TplForm} config={CfgPets} />
+			{/* <Route path="add" component={TplForm} config={CfgPets} /> */}
 		</Route>
 		<Route path="user">
 			<IndexRoute component={TplIndex} config={CfgUser} />

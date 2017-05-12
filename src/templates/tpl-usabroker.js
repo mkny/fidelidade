@@ -8,7 +8,7 @@ import {Link} from 'react-router'
 
 import LxTable from 'react-lx-table'
 
-import { lxbroker } from './../ducks/linx/lxbroker2/LxBroker'
+import { useBroker } from './../ducks/linx/lxbroker2/LxBroker'
 
 import AdminBox from './layout/admin-box'
 
@@ -122,7 +122,7 @@ Index = connect((state, ownProps) => {
 	return jsonReturn;
 })(Index)
 
-Index = lxbroker(Index)
+Index = useBroker(Index)
 
 export default Index;
 

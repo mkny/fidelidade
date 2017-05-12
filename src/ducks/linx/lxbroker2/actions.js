@@ -23,11 +23,8 @@ export const doSwagger = (config={}) => {
 	// if(!config.url && !config.spec){
 	// 	throw Error('No Specification found')
 	// }
-
-	swagger(config).then(sw => {
-		console.log(sw)
-		// cb(sw);
-	})
+	
+	return swagger(config)
 }
 
 

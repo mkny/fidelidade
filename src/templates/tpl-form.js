@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+/*import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import { reduxForm, Field } from 'redux-form'
@@ -113,3 +113,6 @@ Form = connect(state => (dsp) => ({
 }), {config})(Form);
 
 export default Form;
+
+*/
+

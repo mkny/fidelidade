@@ -13,8 +13,8 @@ module.exports = {
 	actions: {
 		create: {
 			url: json,
-			// module: 
-			// method: 
+			module: 'pet-controller',
+			method: 'saveUsingPOST_1',
 		},
 		read: {
 			url : json,
@@ -48,9 +48,29 @@ module.exports = {
 		update: '',
 		del: '',
 	},
-	form: [{
+	form: {
+		submitButton: true,
+		submitButtonText: "Salvar",
+		resetButton: false,
+		resetButtonText: "Limpar",
 
-	}]
+		fields: {
+			nome: {
+				props: {
+					placeholder: 'Nomes'
+				}
+			},
+			tag: {
+				add: false,
+				edit: false,
+			}
+		}
+	},
+	// form: [{
+	// 	field: 'tag',
+	// 	add: true,
+	// 	edit: false,
+	// }],
 	// datagrid: {
 	// 	datasource: [],
 	// 	pagination: {},

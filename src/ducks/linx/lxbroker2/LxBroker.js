@@ -4,8 +4,8 @@
 
 
 import reducer from './reducer'
-import lxbroker from './createConnectedBroker'
+import useBroker from './createConnectedBroker'
 
-export { lxbroker }
+export { useBroker }
 
 export { reducer }

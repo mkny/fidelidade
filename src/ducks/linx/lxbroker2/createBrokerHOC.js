@@ -20,7 +20,7 @@ const superBrokerHOC = (WrappedComponent) => {
 					read: (...args) => this.dispatcher(read, ...args),
 					update: (...args) => this.dispatcher(update, ...args),
 					del: (...args) => this.dispatcher(del, ...args),
-					doSwagger: (...args) => this.dispatcher(doSwagger, ...args),
+					doSwagger: (...args) => doSwagger(...args),
 				}
 			}
 		}
