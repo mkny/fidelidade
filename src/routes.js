@@ -28,7 +28,7 @@ import CfgItaUser from './config/ita-user'
 
 
 import TplUsabroker from './templates/tpl-usabroker'
-import TplUsabrokerForm from './templates/tpl-usabroker-form'
+import TplUsabrokerForm from './templates/tpl-usabroker-form2'
 
 import TplIndex from './templates/tpl-index'
 // import TplIndex from './templates/tpl-index'

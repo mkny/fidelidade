@@ -1,6 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {Field, reduxForm} from 'redux-form'
+import { reduxForm} from 'redux-form'
+
+// Field,
+
 
 class LxForm extends React.Component {
 	render(){

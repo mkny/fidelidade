@@ -11,18 +11,20 @@ const createForm = WrappedComponent => {
 		}
 
 		render(){
-			const { type, fields } = this.props;
-			
+			const {  fields } = this.props;
+			// type,
 			// Check Field length
 			if(!Object.keys(fields).length){
 				return null
 			}
 
-			// Building props
-			const props = {
-				...this.props,
-				fields: _.filter(fields, o => o[type])
-			};
+			// // Building props
+			// const props = {
+			// 	...this.props,
+			// 	fields: _.filter(fields, o => o[type])
+			// };
+
+			
 			
 			return null
 

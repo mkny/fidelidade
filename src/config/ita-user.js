@@ -53,16 +53,30 @@ module.exports = {
 		submitButtonText: "Salvar",
 		resetButton: false,
 		resetButtonText: "Limpar",
+		defaultFieldLabel: false,
+		defaultFieldClassName: 'form-control',
 
 		fields: {
-			nome: {
+			id: {
+				// label: '#',
 				props: {
-					placeholder: 'Nomes'
+					type: 'hidden',
+					placeholder: '#id',
+				}
+			},
+			nome: {
+				label: 'Nome',
+				props: {
+					placeholder: 'Nomes',
 				}
 			},
 			tag: {
 				add: false,
 				edit: false,
+				label: 'Tags',
+				props: {
+					placeholder: 'Tags',
+				}
 			}
 		}
 	},

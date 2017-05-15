@@ -49,6 +49,7 @@ class TplUsabrokerForm extends React.Component {
 		this.props._lxbroker.doSwagger(this.state.create).then(sw => {
 			// const fnc = sw.apis[module][method]
 			let fields = sw.spec.definitions.Pet.properties;
+			
 			// Colocar o sort dos elementos ;)
 			_.forEach(fields, (value, key) => {
 				fields[key] = {
