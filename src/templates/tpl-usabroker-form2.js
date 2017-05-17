@@ -8,29 +8,7 @@ import AdminBox from './layout/admin-box'
 // import LxForm from './../components/lxform'
 import { withForm, FormBuilder } from './../components/lxform2'
 
-const formatter = (data) => {
-	const props = {...data.input, ...data.props}
-
-	// console.log(props)
-
-	const inp = <input
-		id={data.input.id || data.input.name}
-		type="text"
-		{...props}
-
-		/>
-	
-	if( props.type === 'hidden' ){
-		return inp;
-	}
-
-	return <div className="form-group">
-		{data.label && <label htmlFor={data.input.name}>{data.label}</label>}
-		{inp}
-	</div>
-}
-
-
+// const formatter = ( data ) => {}
 
 class TplUsabrokerForm extends React.Component {
 	constructor(props){
@@ -58,7 +36,6 @@ class TplUsabrokerForm extends React.Component {
 	}
 
 	render(){
-		console.log('building..')
 		return <div className="content">
 			<div className="row">
 				<div className="col-md-12">
@@ -66,9 +43,15 @@ class TplUsabrokerForm extends React.Component {
 						<FormBuilder
 							type="add"
 
-							// format={formatter}
-							format={{fields: formatter}}
-							formdata={this.state.form}
+							// format={{fields: formatter}}
+
+							formdata={{
+								resetButtonClass: 'btn btn-info _dsp',
+								submitButtonClass: 'btn btn-success',
+								...this.state.form,
+							}}
+							
+
 							/>
 					</AdminBox>
 				</div>
@@ -76,7 +59,6 @@ class TplUsabrokerForm extends React.Component {
 		</div>
 	}
 }
-
 
 TplUsabrokerForm = withForm(TplUsabrokerForm)
 

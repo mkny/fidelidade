@@ -50,11 +50,14 @@ module.exports = {
 	},
 	form: {
 		submitButton: true,
+		submitButtonClass: "btn btn-success",
 		submitButtonText: "Salvar",
 		resetButton: false,
+		resetButtonClass: "btn btn-info",
 		resetButtonText: "Limpar",
-		defaultFieldLabel: false,
+		defaultFieldLabel: true,
 		defaultFieldClassName: 'form-control',
+
 
 		fields: {
 			id: {
@@ -67,14 +70,17 @@ module.exports = {
 			nome: {
 				label: 'Nome',
 				props: {
+					// type: 'text',
+					// className: 'radio-input',
 					placeholder: 'Nomes',
 				}
 			},
 			tag: {
 				add: false,
-				edit: false,
+				edit: true,
 				label: 'Tags',
 				props: {
+					// disabled: true,
 					placeholder: 'Tags',
 				}
 			}
