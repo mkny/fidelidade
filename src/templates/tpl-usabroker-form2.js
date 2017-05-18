@@ -6,9 +6,12 @@ import { useBroker } from './../ducks/linx/lxbroker2/LxBroker'
 import AdminBox from './layout/admin-box'
 
 // import LxForm from './../components/lxform'
-import { withForm, FormBuilder } from './../components/lxform2'
+import { withForm, LxForm } from './../components/lxform2'
 
-// const formatter = ( data ) => {}
+// const formatter = ( input, extra, props ) => {
+// 	console.log('tpl', {input, extra, props})
+
+// }
 
 class TplUsabrokerForm extends React.Component {
 	constructor(props){
@@ -25,32 +28,46 @@ class TplUsabrokerForm extends React.Component {
 
 		this.props._lxbroker.doSwagger(create).then(sw => {
 			const { properties } = _.at(sw, 'spec.definitions.Pet')[0];
+			const fields = _.merge(properties, form.fields);
 
-			this.setState({
-				form: {
-					...form,
-					fields: _.merge(properties, form.fields)
-				}
-			})
+			this.setState({form: {...form, fields}})
 		})
 	}
 
 	render(){
+		// console.log(this.state.form)
 		return <div className="content">
 			<div className="row">
 				<div className="col-md-12">
 					<AdminBox header="LxForm">
-						<FormBuilder
+						<LxForm
 							type="add"
 
-							// format={{fields: formatter}}
+							submitButtonClass="btn btn-success"
+							defaultFieldClassName="form-control"
+							defaultFieldLabel={true}
 
-							formdata={{
-								resetButtonClass: 'btn btn-info _dsp',
-								submitButtonClass: 'btn btn-success',
-								...this.state.form,
-							}}
+							{...this.state.form}
+
+							// formatter={{field: formatter}}
+
+							// fields={this.state.form && this.state.form.fields}
 							
+							// fields={[
+							// 	'Nome','Sobrenome'
+							// ]}
+
+							// fields={{
+							// 	username: {
+							// 		label: 'Usuário'
+							// 	},
+							// 	password: {
+							// 		label: 'Senha',
+							// 		props: {
+							// 			type: 'password'
+							// 		}
+							// 	},
+							// }}
 
 							/>
 					</AdminBox>

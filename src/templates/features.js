@@ -104,6 +104,7 @@ class Features extends React.Component {
 							</TabPanel>
 						</Tabs>
 					</AdminBox>
+
 				</div>
 				<div className="col-md-6">
 					<AdminBox color="primary" header={<h3>Qr code Generator</h3>}>
@@ -133,3 +134,9 @@ class Features extends React.Component {
 }
 
 export default Features
+
+// <AdminBox header="LxForm">
+// 	<LxForm
+// 		fields={{"id":{"type":"integer","format":"int64","props":{"type":"hidden","placeholder":"#id"}},"nome":{"type":"string","label":"Nome","props":{"placeholder":"Nomes"}},"tag":{"type":"string","add":false,"edit":true,"label":"Tags","props":{"placeholder":"Tags"}}}}
+// 		/>
+// </AdminBox>
