@@ -13,6 +13,9 @@ import QrCode from 'qrcode.react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
+// Soap
+// import soap from 'soap'
+
 // LxTable
 import LxTable from 'react-lx-table'
 
@@ -70,6 +73,55 @@ class Features extends React.Component {
 		this.signature.clear();
 	}
 
+	runsoap(){
+		const url = 'http://mfsubway.rezendesistemas.com.br/WSFranchising/Servicos?wsdl';
+		const method = 'rankingProdutos';
+		const jsonParams = {
+			"NovaRequisicao": "N",
+			"IDSessao": "32212",
+			"Modo": "L",
+			"Periodo": {
+				"DataInicio": "2013-05-01",
+				"DataFim": "2013-05-31"
+			},
+			"Territorio": {
+				"Estados": {
+					"UF": "MG"
+				},
+				"Cidades": {
+					"Cidade": ["5300108", "2900008"]
+				}
+			},
+			"Paginacao": {
+				"Limit": "10",
+				"Offset": "0"
+			},
+			"Ranking": {
+				"Tipo": "VALOR",
+				"Ordenacao": "MAIOR",
+				"Quantidade": "10"
+			}
+		};
+
+		const params = {
+			codigoFranquia: 1,
+			xmlParametros: JSON.stringify(jsonParams)
+		}
+
+		const par = Object.keys(params).map(function(k) {
+			return `params[${(k)}]` + '=' + (params[k])
+		}).join('&');
+
+		// console.log()
+
+		fetch(`http://localhost:9000?method=${method}&url=${url}&${par}`).then(r => {
+			r.json().then(d => {
+				console.log(d);
+			})
+		})
+		
+	}
+
 	render() {
 		return <section className="content">
 			<div className="row">
@@ -103,6 +155,9 @@ class Features extends React.Component {
 								<h2>Any Content 3</h2>
 							</TabPanel>
 						</Tabs>
+					</AdminBox>
+					<AdminBox header="Soap Client">
+						{this.runsoap()}
 					</AdminBox>
 
 				</div>
