@@ -155,7 +155,8 @@ class Features extends React.Component {
 						</Tabs>
 					</AdminBox>
 					<AdminBox header="Soap Client">
-						{this.runsoap()}
+						Back soon
+						{/*this.runsoap()*/}
 					</AdminBox>
 
 				</div>
