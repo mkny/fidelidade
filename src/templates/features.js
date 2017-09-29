@@ -108,9 +108,7 @@ class Features extends React.Component {
 			xmlParametros: JSON.stringify(jsonParams)
 		}
 
-		const par = Object.keys(params).map(function(k) {
-			return `params[${(k)}]` + '=' + (params[k])
-		}).join('&');
+		const par = Object.keys(params).map(k => `params[${(k)}]=${params[k]}`).join('&');
 
 		// console.log()
 
