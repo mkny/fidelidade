@@ -35,16 +35,14 @@ import 'bootstrap/dist/css/bootstrap.css';
 // # Bootstrap
 
 // # Admin-lte
-import 'admin-lte/dist/css/AdminLTE.min.css';
+
+
+import 'admin-lte/dist/css/AdminLTE.css';
 import 'admin-lte/dist/css/skins/_all-skins.min.css';
-import 'admin-lte/plugins/iCheck/flat/blue.css';
-import 'admin-lte/plugins/morris/morris.css';
-// import 'admin-lte/plugins/jvectormap/jquery-jvectormap-1.2.2.css';
-import 'admin-lte/plugins/datepicker/datepicker3.css';
-import 'admin-lte/plugins/daterangepicker/daterangepicker.css';
-import 'admin-lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css';
+// import 'admin-lte/plugins/iCheck/flat/blue.css';
 import 'font-awesome/css/font-awesome.min.css';
 import 'ionicons/dist/css/ionicons.min.css';
+
 // # Admin-lte
 
 import './../../public/css/style.css';
@@ -102,9 +100,9 @@ class App extends Component {
   componentDidMount(){
     window.jQuery = window.$ = require('jquery');
 
-    require('admin-lte');
+    
     require('bootstrap/dist/js/bootstrap.min.js');
-    require('admin-lte/plugins/slimScroll/jquery.slimscroll.min.js');
+    // require('admin-lte/plugins/slimScroll/jquery.slimscroll.min.js');
   }
 
   
